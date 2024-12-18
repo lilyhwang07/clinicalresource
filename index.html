@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opioid Conversion Calculator</title>
+    <title>Opioid Conversion & MME Calculator</title>
 
     <style>
         body {
@@ -15,38 +15,38 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #fafafa;
-            color: #444;
+            background-color: #fefefe;
+            color: #333;
         }
 
         .dual-container {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
-            max-width: 900px;
+            gap: 30px;
+            max-width: 960px;
             width: 100%;
         }
 
         .container, .mme-container {
             background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             flex: 1;
         }
 
         h1 {
             font-size: 1.8em;
             margin-bottom: 20px;
-            color: #5a3d6e;
+            color: #4a4a8b;
             text-align: center;
         }
 
         label {
             display: block;
-            margin: 12px 0 6px;
-            font-weight: bold;
-            color: #5a3d6e;
+            margin: 10px 0 5px;
+            font-weight: 600;
+            color: #4a4a8b;
         }
 
         input, select {
@@ -54,23 +54,24 @@
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 1em;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         input:focus, select:focus {
-            border-color: #a279c9;
+            border-color: #7c6ea8;
+            box-shadow: 0 0 6px rgba(124, 110, 168, 0.5);
             outline: none;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background-color: #a279c9;
+            background-color: #7c6ea8;
             color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
@@ -78,24 +79,24 @@
         }
 
         button:hover {
-            background-color: #8b5daf;
+            background-color: #675899;
         }
 
         .result {
-            margin-top: 20px;
-            font-size: 1.2em;
+            margin-top: 15px;
+            font-size: 1.1em;
             font-weight: bold;
             text-align: center;
-            color: #5a3d6e;
-            background: #f8f3fc;
+            color: #333;
+            background: #f4f1fa;
             padding: 10px;
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         @media (max-width: 768px) {
             .dual-container {
                 flex-direction: column;
-                gap: 30px;
+                gap: 20px;
             }
         }
     </style>
@@ -178,10 +179,10 @@
             }
 
             const morphineEquivalent = currentOpioid === 'fentanyl' 
-                ? currentDose * 2.4 // Fentanyl mcg/hr to morphine mg/day
+                ? currentDose * 2.4
                 : currentDose / conversionFactors[currentOpioid];
             const targetDose = targetOpioid === 'fentanyl' 
-                ? morphineEquivalent / 2.4 // Morphine mg/day to fentanyl mcg/hr
+                ? morphineEquivalent / 2.4
                 : morphineEquivalent * conversionFactors[targetOpioid];
 
             const unit = targetOpioid === 'fentanyl' ? 'mcg/hr' : 'mg';
@@ -199,7 +200,7 @@
             }
 
             const mmeValue = mmeOpioid === 'fentanyl' 
-                ? mmeDose * 2.4 // Fentanyl mcg/hr to morphine mg/day
+                ? mmeDose * 2.4 
                 : mmeDose * conversionFactors[mmeOpioid];
 
             document.getElementById('mmeResult').textContent = `Total MME: ${mmeValue.toFixed(2)} mg/day`;
