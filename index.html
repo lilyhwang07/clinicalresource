@@ -25,6 +25,21 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
+            margin-right: 20px;
+        }
+
+        .dual-container {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .mme-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 100%;
         }
 
         h1 {
@@ -77,40 +92,59 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Opioid Conversion Calculator</h1>
-        <label for="currentOpioid">Current Opioid:</label>
-        <select id="currentOpioid">
-            <option value="morphine">Morphine</option>
-            <option value="oxycodone">Oxycodone</option>
-            <option value="hydromorphone">Hydromorphone</option>
-            <option value="hydrocodone">Hydrocodone</option>
-            <option value="fentanyl">Fentanyl (mcg/hr)</option>
-        </select>
+    <div class="dual-container">
+        <div class="container">
+            <h1>Opioid Conversion Calculator</h1>
+            <label for="currentOpioid">Current Opioid:</label>
+            <select id="currentOpioid">
+                <option value="morphine">Morphine</option>
+                <option value="oxycodone">Oxycodone</option>
+                <option value="hydromorphone">Hydromorphone</option>
+                <option value="hydrocodone">Hydrocodone</option>
+                <option value="fentanyl">Fentanyl (mcg/hr)</option>
+            </select>
 
-        <label for="currentDose">Current Dose (mg or mcg/hr):</label>
-        <select id="currentDose">
-            <option value="">Enter dose</option>
-        </select>
+            <label for="currentDose">Current Dose (mg or mcg/hr):</label>
+            <input type="number" id="currentDose" placeholder="Enter dose">
 
-        <label for="targetOpioid">Target Opioid:</label>
-        <select id="targetOpioid">
-            <option value="morphine">Morphine</option>
-            <option value="oxycodone">Oxycodone</option>
-            <option value="hydromorphone">Hydromorphone</option>
-            <option value="hydrocodone">Hydrocodone</option>
-            <option value="fentanyl">Fentanyl (mcg/hr)</option>
-        </select>
+            <label for="targetOpioid">Target Opioid:</label>
+            <select id="targetOpioid">
+                <option value="morphine">Morphine</option>
+                <option value="oxycodone">Oxycodone</option>
+                <option value="hydromorphone">Hydromorphone</option>
+                <option value="hydrocodone">Hydrocodone</option>
+                <option value="fentanyl">Fentanyl (mcg/hr)</option>
+            </select>
 
-        <label for="targetRoute">Route of Administration:</label>
-        <select id="targetRoute">
-            <option value="oral">Oral</option>
-            <option value="iv">IV</option>
-        </select>
+            <label for="targetRoute">Route of Administration:</label>
+            <select id="targetRoute">
+                <option value="oral">Oral</option>
+                <option value="iv">IV</option>
+            </select>
 
-        <button onclick="calculateConversion()">Calculate</button>
+            <button onclick="calculateConversion()">Calculate</button>
 
-        <div class="result" id="result"></div>
+            <div class="result" id="result"></div>
+        </div>
+
+        <div class="mme-container">
+            <h1>Total MME Calculator</h1>
+            <label for="mmeOpioid">Opioid:</label>
+            <select id="mmeOpioid">
+                <option value="morphine">Morphine</option>
+                <option value="oxycodone">Oxycodone</option>
+                <option value="hydromorphone">Hydromorphone</option>
+                <option value="hydrocodone">Hydrocodone</option>
+                <option value="fentanyl">Fentanyl (mcg/hr)</option>
+            </select>
+
+            <label for="mmeDose">Dose (mg or mcg/hr):</label>
+            <input type="number" id="mmeDose" placeholder="Enter dose">
+
+            <button onclick="calculateMME()">Calculate MME</button>
+
+            <div class="result" id="mmeResult"></div>
+        </div>
     </div>
 
     <script>
@@ -142,6 +176,22 @@
             const unit = targetOpioid === 'fentanyl' ? 'mcg/hr' : 'mg';
 
             document.getElementById('result').textContent = `Equivalent Dose: ${targetDose.toFixed(2)} ${unit} of ${targetOpioid}`;
+        }
+
+        function calculateMME() {
+            const mmeOpioid = document.getElementById('mmeOpioid').value;
+            const mmeDose = parseFloat(document.getElementById('mmeDose').value);
+
+            if (isNaN(mmeDose) || mmeDose <= 0) {
+                document.getElementById('mmeResult').textContent = 'Please enter a valid dose.';
+                return;
+            }
+
+            const mmeValue = mmeOpioid === 'fentanyl' 
+                ? mmeDose * 2.4 // Fentanyl mcg/hr to morphine mg/day
+                : mmeDose * conversionFactors[mmeOpioid];
+
+            document.getElementById('mmeResult').textContent = `Total MME: ${mmeValue.toFixed(2)} mg/day`;
         }
     </script>
 </body>
