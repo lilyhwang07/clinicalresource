@@ -8,72 +8,73 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f3e8f7;
-        }
-
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            margin-right: 20px;
+            background-color: #fafafa;
+            color: #444;
         }
 
         .dual-container {
             display: flex;
             align-items: flex-start;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
         }
 
-        .mme-container {
+        .container, .mme-container {
             background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 300px;
-            width: 100%;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            flex: 1;
         }
 
         h1 {
             font-size: 1.8em;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #5a3d6e;
             text-align: center;
         }
 
         label {
             display: block;
-            margin: 10px 0 5px;
+            margin: 12px 0 6px;
             font-weight: bold;
             color: #5a3d6e;
         }
 
         input, select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #c7a6d8;
-            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #a279c9;
+            outline: none;
         }
 
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #a279c9;
             color: #fff;
             border: none;
-            border-radius: 5px;
-            font-size: 1em;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
@@ -81,11 +82,21 @@
         }
 
         .result {
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 1.2em;
             font-weight: bold;
             text-align: center;
             color: #5a3d6e;
+            background: #f8f3fc;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .dual-container {
+                flex-direction: column;
+                gap: 30px;
+            }
         }
     </style>
 
