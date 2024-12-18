@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opioid Conversion Calculator</title>
-    
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,66 +15,67 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f4f9;
+            background-color: #f3e8f7;
         }
-        
+
         .container {
             background: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
         }
-        
+
         h1 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #5a3d6e;
             text-align: center;
         }
-        
+
         label {
             display: block;
             margin: 10px 0 5px;
             font-weight: bold;
+            color: #5a3d6e;
         }
-        
+
         input, select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 1px solid #c7a6d8;
+            border-radius: 5px;
             font-size: 1em;
         }
-        
+
         button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #a279c9;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 1em;
             cursor: pointer;
         }
-        
+
         button:hover {
-            background-color: #0056b3;
+            background-color: #8b5daf;
         }
-        
+
         .result {
             margin-top: 15px;
             font-size: 1.2em;
             font-weight: bold;
             text-align: center;
-            color: #333;
+            color: #5a3d6e;
         }
     </style>
-    
+
 </head>
-    
+
 <body>
     <div class="container">
         <h1>Opioid Conversion Calculator</h1>
@@ -83,16 +84,20 @@
             <option value="morphine">Morphine</option>
             <option value="oxycodone">Oxycodone</option>
             <option value="hydromorphone">Hydromorphone</option>
+            <option value="hydrocodone">Hydrocodone</option>
+            <option value="fentanyl">Fentanyl (mcg/hr)</option>
         </select>
 
-        <label for="currentDose">Current Dose (mg):</label>
-        <input type="number" id="currentDose" placeholder="Enter dose in mg">
+        <label for="currentDose">Current Dose (mg or mcg/hr):</label>
+        <input type="number" id="currentDose" placeholder="Enter dose">
 
         <label for="targetOpioid">Target Opioid:</label>
         <select id="targetOpioid">
             <option value="morphine">Morphine</option>
             <option value="oxycodone">Oxycodone</option>
             <option value="hydromorphone">Hydromorphone</option>
+            <option value="hydrocodone">Hydrocodone</option>
+            <option value="fentanyl">Fentanyl (mcg/hr)</option>
         </select>
 
         <label for="targetRoute">Route of Administration:</label>
@@ -111,6 +116,8 @@
             morphine: 1,
             oxycodone: 1.5,
             hydromorphone: 4,
+            hydrocodone: 1,
+            fentanyl: 0.1, // Assuming mcg/hr to oral morphine equivalent
         };
 
         function calculateConversion() {
@@ -123,11 +130,18 @@
                 return;
             }
 
-            const morphineEquivalent = currentDose / conversionFactors[currentOpioid];
-            const targetDose = morphineEquivalent * conversionFactors[targetOpioid];
+            const morphineEquivalent = currentOpioid === 'fentanyl' 
+                ? currentDose * 2.4 // Fentanyl mcg/hr to morphine mg/day
+                : currentDose / conversionFactors[currentOpioid];
+            const targetDose = targetOpioid === 'fentanyl' 
+                ? morphineEquivalent / 2.4 // Morphine mg/day to fentanyl mcg/hr
+                : morphineEquivalent * conversionFactors[targetOpioid];
 
-            document.getElementById('result').textContent = `Equivalent Dose: ${targetDose.toFixed(2)} mg of ${targetOpioid}`;
+            const unit = targetOpioid === 'fentanyl' ? 'mcg/hr' : 'mg';
+
+            document.getElementById('result').textContent = `Equivalent Dose: ${targetDose.toFixed(2)} ${unit} of ${targetOpioid}`;
         }
     </script>
 </body>
+
 </html>
