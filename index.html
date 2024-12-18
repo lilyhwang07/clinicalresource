@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opioid Conversion & MME Calculator</title>
+    <title>Opioid Conversion Calculator</title>
 
     <style>
         body {
@@ -15,29 +15,29 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #fefefe;
+            background-color: #f9f9f9;
             color: #333;
         }
 
         .dual-container {
             display: flex;
             align-items: flex-start;
-            gap: 30px;
+            gap: 24px;
             max-width: 960px;
             width: 100%;
         }
 
         .container, .mme-container {
             background: #fff;
-            padding: 30px 25px;
+            padding: 28px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             flex: 1;
         }
 
         h1 {
             font-size: 1.8em;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             color: #4a4a8b;
             text-align: center;
         }
@@ -45,23 +45,23 @@
         label {
             display: block;
             margin: 10px 0 5px;
-            font-weight: 600;
+            font-weight: bold;
             color: #4a4a8b;
         }
 
         input, select {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
+            padding: 10px;
+            margin-bottom: 18px;
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 1em;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         input:focus, select:focus {
             border-color: #7c6ea8;
-            box-shadow: 0 0 6px rgba(124, 110, 168, 0.5);
+            box-shadow: 0 0 6px rgba(124, 110, 168, 0.4);
             outline: none;
         }
 
@@ -87,9 +87,9 @@
             font-size: 1.1em;
             font-weight: bold;
             text-align: center;
-            color: #333;
-            background: #f4f1fa;
-            padding: 10px;
+            color: #4a4a8b;
+            background: #f4f4fb;
+            padding: 12px;
             border-radius: 6px;
         }
 
@@ -108,7 +108,7 @@
         <div class="container">
             <h1>Opioid Conversion Calculator</h1>
             <label for="currentOpioid">Current Opioid:</label>
-            <select id="currentOpioid">
+            <select id="currentOpioid" style="width: 100%;">
                 <option value="morphine">Morphine</option>
                 <option value="oxycodone">Oxycodone</option>
                 <option value="hydromorphone">Hydromorphone</option>
@@ -120,7 +120,7 @@
             <input type="number" id="currentDose" placeholder="Enter dose">
 
             <label for="targetOpioid">Target Opioid:</label>
-            <select id="targetOpioid">
+            <select id="targetOpioid" style="width: 100%;">
                 <option value="morphine">Morphine</option>
                 <option value="oxycodone">Oxycodone</option>
                 <option value="hydromorphone">Hydromorphone</option>
@@ -129,7 +129,7 @@
             </select>
 
             <label for="targetRoute">Route of Administration:</label>
-            <select id="targetRoute">
+            <select id="targetRoute" style="width: 100%;">
                 <option value="oral">Oral</option>
                 <option value="iv">IV</option>
             </select>
@@ -142,7 +142,7 @@
         <div class="mme-container">
             <h1>Total MME Calculator</h1>
             <label for="mmeOpioid">Opioid:</label>
-            <select id="mmeOpioid">
+            <select id="mmeOpioid" style="width: 100%;">
                 <option value="morphine">Morphine</option>
                 <option value="oxycodone">Oxycodone</option>
                 <option value="hydromorphone">Hydromorphone</option>
@@ -179,10 +179,10 @@
             }
 
             const morphineEquivalent = currentOpioid === 'fentanyl' 
-                ? currentDose * 2.4
+                ? currentDose * 2.4 // Fentanyl mcg/hr to morphine mg/day
                 : currentDose / conversionFactors[currentOpioid];
             const targetDose = targetOpioid === 'fentanyl' 
-                ? morphineEquivalent / 2.4
+                ? morphineEquivalent / 2.4 // Morphine mg/day to fentanyl mcg/hr
                 : morphineEquivalent * conversionFactors[targetOpioid];
 
             const unit = targetOpioid === 'fentanyl' ? 'mcg/hr' : 'mg';
@@ -200,7 +200,7 @@
             }
 
             const mmeValue = mmeOpioid === 'fentanyl' 
-                ? mmeDose * 2.4 
+                ? mmeDose * 2.4 // Fentanyl mcg/hr to morphine mg/day
                 : mmeDose * conversionFactors[mmeOpioid];
 
             document.getElementById('mmeResult').textContent = `Total MME: ${mmeValue.toFixed(2)} mg/day`;
