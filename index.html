@@ -1,60 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opioid Conversion Calculator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Separate stylesheet file -->
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1">&lt;title&gt;Opioid Conversion Calculator&lt;/title&gt;</p>
-<p class="p1">&lt;link rel="stylesheet" href="styles.css"&gt; &lt;!-- Optional: Separate stylesheet file --&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1">&lt;header&gt;</p>
-<p class="p1">&lt;h1&gt;Opioid Conversion Calculator&lt;/h1&gt;</p>
-<p class="p1">&lt;/header&gt;</p>
-<p class="p1">&lt;main&gt;</p>
-<p class="p1">&lt;section class="calculator"&gt;</p>
-<p class="p1">&lt;h2&gt;Calculate Equivalent Doses&lt;/h2&gt;</p>
-<p class="p1">&lt;form id="conversion-form"&gt;</p>
-<p class="p1">&lt;label for="dose"&gt;Enter Current Dose (mg):&lt;/label&gt;</p>
-<p class="p1">&lt;input type="number" id="dose" placeholder="e.g., 30" required&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;label for="current-opioid"&gt;Select Current Opioid:&lt;/label&gt;</p>
-<p class="p1">&lt;select id="current-opioid"&gt;</p>
-<p class="p1">&lt;option value="morphine"&gt;Morphine&lt;/option&gt;</p>
-<p class="p1">&lt;option value="oxycodone"&gt;Oxycodone&lt;/option&gt;</p>
-<p class="p1">&lt;option value="hydromorphone"&gt;Hydromorphone&lt;/option&gt;</p>
-<p class="p1">&lt;/select&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;label for="target-opioid"&gt;Select Target Opioid:&lt;/label&gt;</p>
-<p class="p1">&lt;select id="target-opioid"&gt;</p>
-<p class="p1">&lt;option value="morphine"&gt;Morphine&lt;/option&gt;</p>
-<p class="p1">&lt;option value="oxycodone"&gt;Oxycodone&lt;/option&gt;</p>
-<p class="p1">&lt;option value="hydromorphone"&gt;Hydromorphone&lt;/option&gt;</p>
-<p class="p1">&lt;/select&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;button type="button" onclick="calculateConversion()"&gt;Calculate&lt;/button&gt;</p>
-<p class="p1">&lt;/form&gt;</p>
-<p class="p1">&lt;div id="result" class="result"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;/section&gt;</p>
-<p class="p1">&lt;/main&gt;</p>
-<p class="p1">&lt;footer&gt;</p>
-<p class="p1">&lt;p&gt;&amp;copy; 2024 Opioid Conversion Tool&lt;/p&gt;</p>
-<p class="p1">&lt;/footer&gt;</p>
-<p class="p1">&lt;script src="script.js"&gt;&lt;/script&gt; &lt;!-- External JavaScript file --&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <header>
+        <h1>Opioid Conversion Calculator</h1>
+    </header>
+    <main>
+        <section class="calculator">
+            <h2>Calculate Equivalent Doses</h2>
+            <form id="conversion-form">
+                <label for="dose">Enter Current Dose (mg):</label>
+                <input type="number" id="dose" placeholder="e.g., 30" required>
+
+                <label for="current-opioid">Select Current Opioid:</label>
+                <select id="current-opioid">
+                    <option value="morphine">Morphine</option>
+                    <option value="oxycodone">Oxycodone</option>
+                    <option value="hydromorphone">Hydromorphone</option>
+                </select>
+
+                <label for="target-opioid">Select Target Opioid:</label>
+                <select id="target-opioid">
+                    <option value="morphine">Morphine</option>
+                    <option value="oxycodone">Oxycodone</option>
+                    <option value="hydromorphone">Hydromorphone</option>
+                </select>
+
+                <button type="button" onclick="calculateConversion()">Calculate</button>
+            </form>
+            <div id="result" class="result"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Opioid Conversion Tool</p>
+    </footer>
+    <script src="script.js"></script> <!-- External JavaScript file -->
 </body>
 </html>
