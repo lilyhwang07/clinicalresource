@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;Opioid Conversion Calculator&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1">body {</p>
+<p class="p1">font-family: Arial, sans-serif;</p>
+<p class="p1">margin: 20px;</p>
+<p class="p1">padding: 20px;</p>
+<p class="p1">background-color: #f4f4f9;</p>
+<p class="p1">}</p>
+<p class="p1">.calculator {</p>
+<p class="p1">max-width: 400px;</p>
+<p class="p1">margin: 0 auto;</p>
+<p class="p1">padding: 20px;</p>
+<p class="p1">background: #fff;</p>
+<p class="p1">box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);</p>
+<p class="p1">border-radius: 8px;</p>
+<p class="p1">}</p>
+<p class="p1">.calculator h1 {</p>
+<p class="p1">font-size: 1.5em;</p>
+<p class="p1">margin-bottom: 20px;</p>
+<p class="p1">}</p>
+<p class="p1">.calculator label {</p>
+<p class="p1">display: block;</p>
+<p class="p1">margin: 10px 0 5px;</p>
+<p class="p1">}</p>
+<p class="p1">.calculator input, .calculator select, .calculator button {</p>
+<p class="p1">width: 100%;</p>
+<p class="p1">padding: 10px;</p>
+<p class="p1">margin-bottom: 15px;</p>
+<p class="p1">border: 1px solid #ccc;</p>
+<p class="p1">border-radius: 4px;</p>
+<p class="p1">}</p>
+<p class="p1">.result {</p>
+<p class="p1">margin-top: 20px;</p>
+<p class="p1">font-weight: bold;</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div class="calculator"&gt;</p>
+<p class="p1">&lt;h1&gt;Opioid Conversion Calculator&lt;/h1&gt;</p>
+<p class="p1">&lt;label for="dose"&gt;Enter Current Dose (mg):&lt;/label&gt;</p>
+<p class="p1">&lt;input type="number" id="dose" placeholder="e.g., 30"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;label for="current"&gt;Select Current Opioid:&lt;/label&gt;</p>
+<p class="p1">&lt;select id="current"&gt;</p>
+<p class="p1">&lt;option value="morphine"&gt;Morphine&lt;/option&gt;</p>
+<p class="p1">&lt;option value="oxycodone"&gt;Oxycodone&lt;/option&gt;</p>
+<p class="p1">&lt;option value="hydromorphone"&gt;Hydromorphone&lt;/option&gt;</p>
+<p class="p1">&lt;/select&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;label for="target"&gt;Select Target Opioid:&lt;/label&gt;</p>
+<p class="p1">&lt;select id="target"&gt;</p>
+<p class="p1">&lt;option value="morphine"&gt;Morphine&lt;/option&gt;</p>
+<p class="p1">&lt;option value="oxycodone"&gt;Oxycodone&lt;/option&gt;</p>
+<p class="p1">&lt;option value="hydromorphone"&gt;Hydromorphone&lt;/option&gt;</p>
+<p class="p1">&lt;/select&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;button onclick="calculateConversion()"&gt;Calculate&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="result" class="result"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">function calculateConversion() {</p>
+<p class="p1">const dose = parseFloat(document.getElementById('dose').value);</p>
+<p class="p1">const currentOpioid = document.getElementById('current').value;</p>
+<p class="p1">const targetOpioid = document.getElementById('target').value;</p>
+<p class="p2"><br></p>
+<p class="p1">if (isNaN(dose) || dose &lt;= 0) {</p>
+<p class="p1">document.getElementById('result').textContent = "Please enter a valid dose.";</p>
+<p class="p1">return;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// Conversion factors (simplified example)</p>
+<p class="p1">const conversionFactors = {</p>
+<p class="p1">morphine: 1,</p>
+<p class="p1">oxycodone: 1.5,</p>
+<p class="p1">hydromorphone: 4</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const morphineEquivalent = dose / conversionFactors[currentOpioid];</p>
+<p class="p1">const targetDose = morphineEquivalent * conversionFactors[targetOpioid];</p>
+<p class="p2"><br></p>
+<p class="p1">document.getElementById('result').textContent = `The equivalent dose of ${targetOpioid} is ${targetDose.toFixed(2)} mg.`;</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
